@@ -48,5 +48,5 @@ function searchPokemon(input) {
         }
     }
     
-    console.log("Possibilities: ", p)
+    console.log("Possibilities: ", possibilities)
 }
