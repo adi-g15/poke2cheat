@@ -30,7 +30,7 @@ xobj.send(null)
 function searchPokemon(input) {
     if(input.value === '')  return;
 
-    console.log(`Input was ${input}`)
+    console.log(`Input was ${input.value}`)
     let regex_name = '';
     for (c of input.value) {
         regex_name = regex_name.concat(c)
