@@ -9,9 +9,7 @@ xobj.onreadystatechange = _ => {
     if( xobj.readyState == 4 && xobj.status == "200" ) {
         // .open won't return a value, just returns undefined
 
-        for (p of JSON.parse(xobj.responseText)) {
-            pokedex.push(p['name'])
-        }
+        pokedex = JSON.parse(xobj.responseText)
     }
 };
 xobj.send(null)
@@ -43,7 +41,11 @@ function searchPokemon(input) {
     }
 
     const poke_regex = RegExp(regex_name, 'i')
-    const possibilities = pokedex.filter(val => poke_regex.test(val));
-    
+    const possibilities = pokedex.filter(({name}) => poke_regex.test(name));
+
+    result.innerHTML = `<table><thead><tr><th>ID</th><th>Pokemon</th><tbody>
+    ${possibilities.map(p => `<tr><td>${p['id']}</td><td>${p['name']}</td></tr>`).join('')}
+    </tbody></table>`
+
     console.log("Possibilities: ", possibilities)
 }
