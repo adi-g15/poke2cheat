@@ -32,6 +32,7 @@ xobj.send(null)
 function searchPokemon(input) {
     if(input.value === '')  return;
 
+    console.log(`Input was ${input}`)
     let regex_name = '';
     for (c of input.value) {
         regex_name = regex_name.concat(c)
@@ -42,12 +43,7 @@ function searchPokemon(input) {
     }
 
     const poke_regex = RegExp(regex_name, 'i')
-    const possibilities = []
-    for (p of pokedex) {
-        if(poke_regex.test(p)) {
-            possibilities.push(p)
-        }
-    }
+    const possibilities = pokedex.filter(val => poke_regex.test(val));
     
     console.log("Possibilities: ", possibilities)
 }
