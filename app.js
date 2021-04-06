@@ -34,10 +34,11 @@ function searchPokemon(input) {
 
     let regex_name = '';
     for (c of input.value) {
-        regex_name.concat('\\w*')
-    }
-    if(regex_name.length > 0) {
-        regex_name = regex_name.substr(0, regex_name.length-3)
+        regex_name.concat(c)
+        if(c === '_')
+            regex_name.concat('\\w')
+        else
+            regex_name.concat('\\w*')
     }
 
     const poke_regex = RegExp(regex_name, 'i')
