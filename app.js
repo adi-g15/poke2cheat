@@ -1,6 +1,8 @@
 const result = document.getElementById("search-result");
 result.innerHTML = `<p>Type in something first...</p>`
 
+let MAX_RESULTS = 20;
+
 const xobj = new XMLHttpRequest()
 let pokedex = []
 xobj.overrideMimeType('application/json')
@@ -27,6 +29,10 @@ xobj.send(null)
 //         console.error(err)
 //     }) 
 
+function changeMaxResults(number) {
+    MAX_RESULTS = parseInt(number)
+}
+
 function searchPokemon(input) {
     if(input.value === '')  return;
 
@@ -41,7 +47,8 @@ function searchPokemon(input) {
     }
 
     const poke_regex = RegExp(regex_name, 'i')
-    const possibilities = pokedex.filter(({name}) => poke_regex.test(name));
+    const possibilities = pokedex.filter(({name}) => poke_regex.test(name))
+                                 .slice(0, MAX_RESULTS);
 
     result.innerHTML = `<table><thead><tr><th>ID</th><th>Pokemon</th><tbody>
     ${possibilities.map(p => `<tr><td>${p['id']}</td><td>${p['name']}</td></tr>`).join('')}
