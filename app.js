@@ -38,10 +38,10 @@ function searchPokemon(input) {
 
     let regex_name = '\\w*';
     for (c of input.value) {
-        regex_name = regex_name.concat(c)
         if(c === '_')
             regex_name = regex_name.concat('\\w')
         else
+            regex_name = regex_name.concat(c)
             regex_name = regex_name.concat('\\w*')
     }
 
@@ -53,5 +53,5 @@ function searchPokemon(input) {
     ${possibilities.map(p => `<tr><td>${p.id}</td><td>${p.name}</td><a href=${`https://github.com/fanzeyi/pokemon.json/raw/master/images/${p.id}.png`}>Link</a></tr>`).join('')}
     </tbody></table>`
 
-    console.log("Possibilities: ", possibilities)
+    console.debug(`Search: ${input.value}\nRegex Expression: ${regex_name}`)
 }
