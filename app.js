@@ -36,8 +36,7 @@ function changeMaxResults(number) {
 function searchPokemon(input) {
     if(input.value === '')  return;
 
-    console.log(`Input was ${input.value}`)
-    let regex_name = '';
+    let regex_name = '\\w*';
     for (c of input.value) {
         regex_name = regex_name.concat(c)
         if(c === '_')
@@ -50,8 +49,8 @@ function searchPokemon(input) {
     const possibilities = pokedex.filter(({name}) => poke_regex.test(name))
                                  .slice(0, MAX_RESULTS);
 
-    result.innerHTML = `<table><thead><tr><th>ID</th><th>Pokemon</th><tbody>
-    ${possibilities.map(p => `<tr><td>${p['id']}</td><td>${p['name']}</td></tr>`).join('')}
+    result.innerHTML = `<table><thead><tr><th>ID</th><th>Pokemon</th><th>Link</th></thead><tbody>
+    ${possibilities.map(p => `<tr><td>${p.id}</td><td>${p.name}</td><a href=${`https://github.com/fanzeyi/pokemon.json/raw/master/images/${p.id}.png`}>Link</a></tr>`).join('')}
     </tbody></table>`
 
     console.log("Possibilities: ", possibilities)
