@@ -49,9 +49,29 @@ function searchPokemon(input) {
     const possibilities = pokedex.filter(({name}) => poke_regex.test(name))
                                  .slice(0, MAX_RESULTS);
 
-    result.innerHTML = `<table><thead><tr><th>ID</th><th>Pokemon</th><th>Link</th></thead><tbody>
-    ${possibilities.map(p => `<tr><td>${p.id}</td><td>${p.name}</td><a href=${`https://github.com/fanzeyi/pokemon.json/raw/master/images/${p.id}.png`}>Link</a></tr>`).join('')}
-    </tbody></table>`
+    result.innerHTML = `
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Pokemon</th>
+                    <th>Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${possibilities.map(p => `
+                <tr>
+                    <td>${p.id}</td>
+                    <td>${p.name}</td>
+                    <td>
+                        <a href=${`https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/${p.id}.png`}>
+                            <img src=${`https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/sprites/${p.id}MS.png`} />
+                        </a>
+                    </td>
+                </tr>`).join('')}
+            </tbody>
+        </table>
+        `
 
     console.debug(`Search: ${input.value}\nRegex Expression: ${regex_name}`)
 }
