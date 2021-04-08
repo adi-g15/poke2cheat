@@ -34,7 +34,8 @@ function changeMaxResults(number) {
 }
 
 function searchPokemon(input) {
-    if (input.value === '') {
+    const query = input.value;
+    if (query === '') {
         result.innerHTML = `
             <table>
                 <thead>
@@ -59,8 +60,8 @@ function searchPokemon(input) {
             </table>
             `
     } else {
-        let regex_name = '\\w*';
-        for (c of input.value) {
+        let regex_name = /\W/.test(query[0]) ? '': '\\w*';
+        for (c of query) {
             if (c === '_')
                 regex_name = regex_name.concat('\\w')
             else
@@ -96,7 +97,7 @@ function searchPokemon(input) {
             </table>
             `
 
-        console.debug(`Search: ${input.value}\nRegex Expression: ${regex_name}`)
+        console.debug(`Search: ${query}\nRegex Expression: ${regex_name}`)
     }
 
 }
